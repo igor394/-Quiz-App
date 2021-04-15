@@ -20,7 +20,11 @@ function App() {
 
 return (
         <Context.Provider value={value}>
-            {check?<QuizLogic/> : Object.keys(quizList).map((item, index)=> <button onClick={selectPlay} key={index} id={item} type="submit">{item}</button>)}
+            <div className="main">
+                {check?<QuizLogic/> : Object.keys(quizList).map((item, index)=>
+                    <div onClick={selectPlay} key={index} id={item} className="quiz-list"><div>{item}</div></div>)}
+            </div>
+
         </Context.Provider>
 
 );

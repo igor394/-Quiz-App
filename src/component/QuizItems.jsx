@@ -4,14 +4,14 @@ import React from 'react';
 const QuizItems = (props) => {
 
     return (
-        <div>
-            <div>
+        <div className="content-qwest">
+            <div className="content-text">
                 <div>
-                    <span>Question {props.current + 1}</span>/{props.firstQuiz.length}
+                    Question {props.current + 1}/{props.firstQuiz.length}
                 </div>
-                <div>{props.firstQuiz[props.current].questionText}</div>
+                <div style={{paddingTop:'50px'}}>{props.firstQuiz[props.current].questionText}</div>
             </div>
-            <div >
+            <div className="content-btn">
                 {props.firstQuiz[props.current].answerOptions.map((item, index) => (
                     <button key={index} onClick={() => props.handleAnswerOptionClick(item.isCorrect)}>{item.answerText}</button>
                 ))}

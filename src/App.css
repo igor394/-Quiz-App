@@ -1,3 +1,7 @@
+#root{
+    background-color: lightsteelblue;
+    min-height: 100vh;
+}
 .app{
     border: 2px solid darkcyan;
     width: 600px;
@@ -6,4 +10,47 @@
     margin: auto;
     margin-top: 150px;
     border-radius: 10px;
+    background-color: dimgray;
+}
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    lign-items: center;
+}
+.quiz-list{
+    border: 2px solid darkcyan;
+    border-radius: 10px;
+    height: 200px;
+    width: 350px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 100px ;
+    background-color: dimgray;
+    font-size: 30px;
+
+}
+button{
+    border-radius: 5px;
+    background-color: cadetblue;
+    width: 120px;
+    margin: 10px;
+    padding: 10px;
+}
+.content-qwest{
+    display:flex;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 20px;
+}
+.content-text{
+   margin: auto;
+}
+.content-btn{
+    margin: auto;
+}
+.result{
+    display: flex;
 }

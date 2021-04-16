@@ -19,6 +19,7 @@ const QuizLogic = () => {
     useEffect(()=>{
         setFirstQuiz(quizList[quiz]);
     },[quiz])
+    console.log(firstQuiz)
 
     const handleAnswerOptionClick = (isCorrect) => {
         if (isCorrect) setBalls(balls + 1);

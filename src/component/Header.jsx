@@ -1,0 +1,27 @@
+import React from 'react';
+import { NavLink } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../reducers/userReducer";
+
+const Header = () => {
+    const isAuth = useSelector(state => state.user.isAuth);
+    const dispatch = useDispatch();
+    return (
+        <div className="navbar navbar-expand-md navbar-dark bg-dark">
+            <div className="container d-flex">
+                <div>
+                    <NavLink to="/">Home</NavLink>
+                </div>
+                {!isAuth && <div>
+                    <NavLink to="/login">Log In </NavLink>
+                    <NavLink to="/reg"> Registration</NavLink>
+                </div>}
+                {isAuth && <div onClick={()=> dispatch(login())}><a href="/auth">Log OUT</a>
+                </div>}
+
+            </div>
+        </div>
+
+    );
+};
+export default Header;

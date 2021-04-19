@@ -1,32 +1,36 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import React, {useState} from "react";
-import {quizList} from './data/dataQuiz'
-import QuizLogic from "./component/QuizLogic";
-import Context from './context/context';
+import React, {useEffect} from "react";
+import Home from "./component/Home";
+import Header from "./component/Header";
+import Registr from "./component/Registr";
+import Authoriz from './component/Authoriz'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
+import {authentication} from "./actions/user";
+
+
 
 function App() {
-    const [quiz, setQuiz] = useState('');
-    const [timer, setTimer] = useState(0)
-    const [check, setCheck] = useState(false);
-    const value = {check, setCheck, quiz, timer};
 
-    const  selectPlay =(e)=>{
-    let item = e.target.id;
-    setCheck(true);
-    setTimer(+new Date())
-    setQuiz(item);
-}
-
+    const isAuth = useSelector(state => state.user.isAuth);
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(authentication())
+    }, [dispatch])
 
 return (
-        <Context.Provider value={value}>
-            <div className="main">
-                {check?<QuizLogic/> : Object.keys(quizList).map((item, index)=>
-                    <div onClick={selectPlay} key={index} id={item} className="quiz-list"><div>{item}</div></div>)}
-            </div>
+    <Router>
+        <Header/>
+        {!isAuth ? <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/reg" component={Registr} />
+            <Route exact path="/login" component={Authoriz} />
+        </Switch> : <Switch>
+            <Route exact path="/" component={Home} />
+        </Switch>}
 
-        </Context.Provider>
-
+    </Router>
 );
 }
 export default App;

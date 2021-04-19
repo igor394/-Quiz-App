@@ -1,6 +1,6 @@
 import axios from "axios";
 import env from '../env.json';
-import {setUser} from "../reducers/userReducer";
+import {setUser, addPassing} from "../reducers/userReducer";
 
 
 export  const registrations = async (name, password, email) => {
@@ -40,6 +40,21 @@ export  const authentication = () => {
         }catch (e) {
             alert(e.response.data.message)
             localStorage.removeItem('token')
+        }
+    }
+}
+export  const passingUser = (name, passing) => {
+    return async dispatch =>{
+        passing = JSON.stringify([passing])
+        try{
+            const response = await axios.post(env.urlBackPassing, {
+                "name": name,
+                "passing": passing
+            })
+            dispatch(addPassing(JSON.parse(response.config.data)));
+            console.log(response.config.data)
+        }catch (e) {
+            alert(e.message)
         }
     }
 }

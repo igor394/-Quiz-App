@@ -1,8 +1,10 @@
 const SET_USER = 'SET_USER';
 const LOG_OUT = 'LOG_OUT';
+const ADD_PASSING = 'ADD_PASSING'
 const  defaultState ={
     currentUser:{},
-    isAuth: false
+    isAuth: false,
+    passing: []
 };
 
 export default function userReducer(state = defaultState, action) {
@@ -20,6 +22,13 @@ export default function userReducer(state = defaultState, action) {
                 currentUser: {},
                 isAuth: false
             }
+        case ADD_PASSING:
+            console.log(action.payload)
+
+            return {
+                ...state,
+           passing: state.passing.push([action.payload])
+            }
         default:
             return state
     }
@@ -27,3 +36,5 @@ export default function userReducer(state = defaultState, action) {
 
 export const setUser = user => ({ type: SET_USER, payload: user})
 export const logOut = () => ({ type: LOG_OUT})
+export const addPassing = quiz => ({ type: ADD_PASSING, payload: quiz})
+

@@ -1,19 +1,21 @@
 import React, {useState} from 'react';
 import Context from "../context/context";
 import QuizLogic from "./QuizLogic";
-import {quizList} from "../data/dataQuiz";
+import {useSelector} from "react-redux";
 
 const Home = () => {
-    const [quiz, setQuiz] = useState('');
-    const [timer, setTimer] = useState(0)
-    const [check, setCheck] = useState(false);
-    const value = {check, setCheck, quiz, timer};
+    const listQuizStore = useSelector(state=> state.quizs.value)
+    const [quizIndex, setQuizIndex] = useState(null);
+    const [timer, setTimer] = useState(0);
 
-    const  selectPlay =(e)=>{
-        let item = e.target.id;
-        setCheck(true);
+    const value = {quizIndex, setQuizIndex, timer};
+
+
+    const  selectPlay = (index ) =>()=> {
+        console.log(listQuizStore)
+        console.log(index)
         setTimer(+new Date())
-        setQuiz(item);
+        setQuizIndex(index);
     }
 
 
@@ -21,8 +23,8 @@ const Home = () => {
 
         <Context.Provider value={value}>
             <div className="main">
-                {check?<QuizLogic/> : Object.keys(quizList).map((item, index)=>
-                    <div onClick={selectPlay} key={index} id={item} className="quiz-list"><div>{item}</div></div>)}
+                {quizIndex!==null ? <QuizLogic quiz={listQuizStore[quizIndex]}/> : listQuizStore.map((item, index)=>
+                    <div onClick={selectPlay(index)} key={index} className="quiz-list"><div>{item['title']}</div></div>)}
             </div>
 
         </Context.Provider>

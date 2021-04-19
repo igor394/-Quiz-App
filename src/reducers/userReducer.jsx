@@ -26,4 +26,4 @@ export default function userReducer(state = defaultState, action) {
 }
 
 export const setUser = user => ({ type: SET_USER, payload: user})
-export const login = () => ({ type: LOG_OUT})
+export const logOut = () => ({ type: LOG_OUT})

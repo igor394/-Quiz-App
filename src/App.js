@@ -8,6 +8,7 @@ import Authoriz from './component/Authoriz'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import {authentication} from "./actions/user";
+import {getListQuiz} from "./actions/quiz";
 
 
 
@@ -17,6 +18,7 @@ function App() {
     const dispatch = useDispatch()
     useEffect(()=>{
         dispatch(authentication())
+        dispatch(getListQuiz())
     }, [dispatch])
 
 return (

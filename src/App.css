@@ -54,3 +54,32 @@ button{
 .result{
     display: flex;
 }
+.not-focus{
+    opacity: 75%;
+}
+.not-focus p{
+    font-size: 16px;
+    color: coral;
+}
+.result-url{
+    border: 2px solid darkcyan;
+    border-radius: 10px;
+    height: 500px;
+    width: 600px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 100px ;
+    background-color: dimgray;
+    font-size: 30px;
+    padding: 10px;
+
+}
+ul{
+    font-size: 15px;
+    padding-top: 10px;
+}
+h4{
+    margin: 20px;
+}

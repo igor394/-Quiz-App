@@ -23,11 +23,10 @@ export default function userReducer(state = defaultState, action) {
                 isAuth: false
             }
         case ADD_PASSING:
-            console.log(action.payload)
 
             return {
                 ...state,
-           passing: state.passing.push([action.payload])
+                passing: action.payload
             }
         default:
             return state

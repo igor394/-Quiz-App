@@ -23,6 +23,7 @@ export  const authorizations = (name, password) => {
                 "password": password
             })
             dispatch(setUser(response.data.user));
+            dispatch(addPassing(response.data.arr));
             localStorage.setItem('token', response.data.token)
         }catch (e) {
             alert(e.message)
@@ -32,10 +33,12 @@ export  const authorizations = (name, password) => {
 export  const authentication = () => {
     return async dispatch =>{
         try{
+
             const response = await axios.get(env.urlBackAuth,
                 { headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}
                 })
             dispatch(setUser(response.data.user));
+            dispatch(addPassing(response.data.arr));
             localStorage.setItem('token', response.data.token)
         }catch (e) {
             alert(e.response.data.message)
@@ -43,16 +46,18 @@ export  const authentication = () => {
         }
     }
 }
-export  const passingUser = (name, passing) => {
+export  const passingUser = (userId, quizId, correct, incorrect ) => {
     return async dispatch =>{
-        passing = JSON.stringify([passing])
+
         try{
             const response = await axios.post(env.urlBackPassing, {
-                "name": name,
-                "passing": passing
+                "userId": userId,
+                "quizId": quizId,
+                "correctAnswers": correct,
+                "incorrectAnswers": incorrect
             })
-            dispatch(addPassing(JSON.parse(response.config.data)));
-            console.log(response.config.data)
+            dispatch(addPassing(response.data));
+
         }catch (e) {
             alert(e.message)
         }

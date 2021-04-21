@@ -26,11 +26,12 @@ const QuizLogic = () => {
 
 
     const handleAnswerOptionClick = (isCorrect) => {
-        if (isCorrect) setBalls(balls + 1);
+        if (isCorrect) setBalls(prev=>prev+1);
         let nextQuest = current + 1;
         if (showQuiz.length > nextQuest) {
             setCurrent(nextQuest);
         } else {
+
             setDate(prev=> (Math.floor((+new Date() - prev)/1000 )))
             setShowRes(true);
         }
@@ -49,15 +50,12 @@ const QuizLogic = () => {
         setQuizIndex(null)
     };
 
-    const userPassing = index =>{
-        dispatch(passingUser(USER.currentUser.name, listQuizStore[index]['title'] ));
-    }
 
-    let complit = <h4>Not enough points, please try again.</h4>
-    if(balls>2){
-        complit = <h4>Great result! Go to the next quiz!</h4>
-        userPassing(quizIndex)
-    }
+    if(showResult) dispatch(passingUser(USER.currentUser.id, quizIndex, balls, showQuiz.length - balls));
+
+    let complit = <h4>Not enough points, please try again.</h4>;
+    if(balls>2) complit = <h4>Great result! Go to the next quiz!</h4>;
+
     return (
         <div className='app'>
             {showResult ? <ShowRes balls={balls} timer={date} complit={complit} startTest={startTest} changeQuiz={changeQuiz} firstQuiz={showQuiz}/> :

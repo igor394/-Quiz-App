@@ -13,4 +13,13 @@ export  const getListQuiz = () => {
         }
     }
 }
+export const  gettingUserResults = async(params)=>{
+
+    try{
+        const result = await axios.get(env.urlBackRes+params);
+        return result.data
+    }catch (e) {
+        alert(e.response.data.message)
+    }
+}
 

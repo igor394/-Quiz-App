@@ -6,44 +6,43 @@ import {useDispatch, useSelector} from "react-redux";
 import {passingUser} from "../actions/user";
 
 
-
 const QuizLogic = () => {
 
-    const listQuizStore = useSelector(state=> state.quizs.value);
-    const USER= useSelector(state=> state.user);
-    const { quizIndex, setQuizIndex, timer} = useContext(Context);
+    const listQuizStore = useSelector(state => state.quizs.value);
+    const USER = useSelector(state => state.user);
+    const {quizIndex, setQuizIndex, timer} = useContext(Context);
     const [date, setDate] = useState(timer);
     const [current, setCurrent] = useState(0);
     const [showResult, setShowRes] = useState(false);
     const [balls, setBalls] = useState(0);
     const [showQuiz, setShowQuiz] = useState(listQuizStore[quizIndex]['info']);
-    const  dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
-    useEffect(()=>{
+    useEffect(() => {
         setShowQuiz(listQuizStore[quizIndex]['info'])
-    },[quizIndex, listQuizStore])
+    }, [quizIndex, listQuizStore])
 
 
     const handleAnswerOptionClick = (isCorrect) => {
-        if (isCorrect) setBalls(prev=>prev+1);
+        if (isCorrect) setBalls(prev => prev + 1);
         let nextQuest = current + 1;
         if (showQuiz.length > nextQuest) {
             setCurrent(nextQuest);
         } else {
 
-            setDate(prev=> (Math.floor((+new Date() - prev)/1000 )))
+            setDate(prev => (Math.floor((+new Date() - prev) / 1000)))
             setShowRes(true);
         }
     };
-    const startTest =()=>{
+    const startTest = () => {
         setBalls(0)
         setShowRes(false)
         setCurrent(0)
         setDate(+new Date())
 
     };
-    const changeQuiz =()=>{
+    const changeQuiz = () => {
         setBalls(0)
         setShowRes(false)
         setCurrent(0)
@@ -51,14 +50,16 @@ const QuizLogic = () => {
     };
 
 
-    if(showResult) dispatch(passingUser(USER.currentUser.id, quizIndex, balls, showQuiz.length - balls));
+    if (showResult) dispatch(passingUser(USER.currentUser.id, quizIndex, balls, showQuiz.length - balls));
 
     let complit = <h4>Not enough points, please try again.</h4>;
-    if(balls>2) complit = <h4>Great result! Go to the next quiz!</h4>;
+    if (balls > 2) complit = <h4>Great result! Go to the next quiz!</h4>;
 
     return (
         <div className='app'>
-            {showResult ? <ShowRes balls={balls} timer={date} complit={complit} startTest={startTest} changeQuiz={changeQuiz} firstQuiz={showQuiz}/> :
+            {showResult ?
+                <ShowRes balls={balls} timer={date} complit={complit} startTest={startTest} changeQuiz={changeQuiz}
+                         firstQuiz={showQuiz}/> :
                 <QuizItems handleAnswerOptionClick={handleAnswerOptionClick} current={current} firstQuiz={showQuiz}/>}
         </div>
     );

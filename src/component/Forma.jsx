@@ -26,9 +26,9 @@ const Forma = (props) => {
                         <Form.Label>Email address</Form.Label>
                         <Form.Control value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Enter email" />
                     </Form.Group>
-                    <Button variant="primary" onClick={()=>registrations(name, pass, email)}>Registrations</Button>
+                    <Button variant="primary" onClick={()=>registrations(name, pass, email)}><a href="/login">Registrations</a></Button>
                 </> :
-                <Button variant="primary" onClick={()=> dispatch(authorizations(name, pass))}>LogIn</Button>}
+                <Button variant="primary" onClick={()=> dispatch(authorizations(name, pass))}><a href="/">LogIn</a></Button>}
         </Form>
     );
 };

@@ -9,20 +9,18 @@ const Result = () => {
     const [users, setUsers] = useState();
     const [listQuest, setListQuest] = useState();
     const listQuizStore = useSelector(state => state.quizs.value || []);
-    const {quizURL} = useParams()
+    const {quizURL} = useParams();
 
+    const result = async () => {
+        let back = await gettingUserResults(quizURL);
+        setTitle(back.quiz);
+        setUsers(back.user);
+        setBalls(back.result);
+    };
 
     useEffect(() => {
         if (quizURL !== undefined) {
-
-            const result = async () => {
-                let back = await gettingUserResults(quizURL);
-                setTitle(back.quiz);
-                setUsers(back.user);
-                setBalls(back.result);
-            }
-            result()
-
+            result();
         }
     }, [quizURL]);
 
@@ -32,7 +30,7 @@ const Result = () => {
         if(foundQuiz) {
             setListQuest(foundQuiz.info.map((item, index) => <li key={index}>{item['questionText']}  </li>))
         }
-    },[title,listQuizStore])
+    },[title,listQuizStore]);
 
     return (
         <div className="container d-flex justify-content-center">

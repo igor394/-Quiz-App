@@ -1,6 +1,6 @@
 import axios from "axios";
 import env from '../env.json';
-import {setUser} from "../reducers/userReducer";
+import {setUser, addPassing} from "../reducers/userReducer";
 
 
 export  const registrations = async (name, password, email) => {
@@ -23,23 +23,43 @@ export  const authorizations = (name, password) => {
                 "password": password
             })
             dispatch(setUser(response.data.user));
+            dispatch(addPassing(response.data.arr));
             localStorage.setItem('token', response.data.token)
         }catch (e) {
-            alert(e.response.data.message)
+            alert(e.message)
         }
     }
 }
 export  const authentication = () => {
     return async dispatch =>{
         try{
+
             const response = await axios.get(env.urlBackAuth,
                 { headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}
                 })
             dispatch(setUser(response.data.user));
+            dispatch(addPassing(response.data.arr));
             localStorage.setItem('token', response.data.token)
         }catch (e) {
             alert(e.response.data.message)
             localStorage.removeItem('token')
+        }
+    }
+}
+export  const passingUser = (userId, quizId, correct, incorrect ) => {
+    return async dispatch =>{
+
+        try{
+            const response = await axios.post(env.urlBackPassing, {
+                "userId": userId,
+                "quizId": quizId,
+                "correctAnswers": correct,
+                "incorrectAnswers": incorrect
+            })
+            dispatch(addPassing(response.data));
+
+        }catch (e) {
+            alert(e.message)
         }
     }
 }

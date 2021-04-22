@@ -29,12 +29,12 @@ return (
             <Route exact path="/" component={Home} />
             <Route exact path="/reg" component={Registr} />
             <Route exact path="/login" component={Authoriz} />
-            <Route exact path="/api/quiz" component={Result} />
-            <Route exact path="/api/quiz/:quizURL" component={Result} />
+            <Route exact path="/result" component={Result} />
+            <Route exact path="/result/:quizURL" component={Result} />
         </Switch> : <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/api/quiz" component={Result} />
-            <Route exact path="/api/quiz/:quizURL" component={Result} />
+            <Route exact path="/result" component={Result} />
+            <Route exact path="/result/:quizURL" component={Result} />
         </Switch>}
 
     </Router>

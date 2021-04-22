@@ -11,7 +11,6 @@ const Header = () => {
             <div className="container d-flex">
                 <div>
                     <NavLink to="/">Home </NavLink>
-                    <NavLink to="/api/quiz"> Result</NavLink>
                 </div>
                 {!isAuth && <div>
                     <NavLink to="/login">Log In </NavLink>

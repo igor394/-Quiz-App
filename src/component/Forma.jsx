@@ -7,28 +7,33 @@ const Forma = (props) => {
     const [name, setName] = useState('');
     const [pass, setPass] = useState('');
     const [email, setEmail] = useState('');
-    const  dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
     return (
         <Form>
             <Form.Group controlId="formGroupEmail">
                 <Form.Label>Name</Form.Label>
-                <Form.Control value={name} onChange={(e)=>setName(e.target.value)} type="name" placeholder="Enter you name" />
+                <Form.Control value={name} onChange={(e) => setName(e.target.value)} type="name"
+                              placeholder="Enter you name"/>
             </Form.Group>
             <Form.Group controlId="formGroupPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control value={pass} onChange={(e)=>setPass(e.target.value)} type="password" placeholder="Password" />
+                <Form.Control value={pass} onChange={(e) => setPass(e.target.value)} type="password"
+                              placeholder="Password"/>
             </Form.Group>
             {props.check ?
                 <>
                     <Form.Group controlId="formGroupEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Enter email" />
+                        <Form.Control value={email} onChange={(e) => setEmail(e.target.value)} type="email"
+                                      placeholder="Enter email"/>
                     </Form.Group>
-                    <Button variant="primary" onClick={()=>registrations(name, pass, email)}><a href="/login">Registrations</a></Button>
+                    <Button variant="primary" type='submit'
+                            onClick={() => registrations(name, pass, email)}>Registrations</Button>
                 </> :
-                <Button variant="primary" onClick={()=> dispatch(authorizations(name, pass))}><a href="/">LogIn</a></Button>}
+                <Button variant="primary" onClick={() => dispatch(authorizations(name, pass))}><a
+                    href="/">LogIn</a></Button>}
         </Form>
     );
 };

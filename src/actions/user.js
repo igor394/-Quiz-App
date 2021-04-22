@@ -4,13 +4,25 @@ import {setUser, addPassing} from "../reducers/userReducer";
 
 
 export  const registrations = async (name, password, email) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(name===''||password===''||email===''){
+        alert('enter all field!');
+        return false;
+    }
+    if(!re.test(String(email).toLowerCase())){
+        alert('encorect email!');
+        return false;
+    }
+
+
+
     try{
         const response = await axios.post(env.urlBackReg, {
             "name": name,
             "password": password,
             "email": email
         })
-        alert(response.data.message)
     }catch (e) {
         alert(e.response.data.message)
     }
@@ -26,7 +38,7 @@ export  const authorizations = (name, password) => {
             dispatch(addPassing(response.data.arr));
             localStorage.setItem('token', response.data.token)
         }catch (e) {
-            alert(e.message)
+            // alert(e.message)
         }
     }
 }
@@ -41,7 +53,7 @@ export  const authentication = () => {
             dispatch(addPassing(response.data.arr));
             localStorage.setItem('token', response.data.token)
         }catch (e) {
-            alert(e.response.data.message)
+            // alert(e.response.data.message)
             localStorage.removeItem('token')
         }
     }
